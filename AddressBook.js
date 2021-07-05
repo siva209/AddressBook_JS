@@ -1,3 +1,6 @@
+
+const prompt = require('prompt-sync')();
+const number = prompt('Enter number :  ');
 class Contact {
     firstName;
     lastName;
@@ -32,7 +35,7 @@ class Contact {
     }
     set lastName(lastName) {
         let lnameRegex = RegExp('^[A-Z]{1}[a-zA-z]{2,}$');
-        if (lnameRegex.test(lasstName)) {
+        if (lnameRegex.test(lastName)) {
             this._lastName = lastName;
         }
         else throw 'Last Name Incorrect';
@@ -70,7 +73,7 @@ class Contact {
     }
     set phoneNumber(phoneNumber) {
         let phoneRegex = RegExp('^[1-9]{1}[0-9]{9}$');
-        if (phoneRegex.test(this.phoneNumber)) {
+        if (phoneRegex.test(phoneNumber)) {
             this._phoneNumber = this.phoneNumber;
         }
         else throw 'Invalid Phone Number';
@@ -85,8 +88,29 @@ class Contact {
         }
         else throw 'Invalid Email';
     }
+    createContact() {
+        this.firstName = prompt('Enter the first name : ');
+        this.lastName = prompt('Enter the last name : ');
+        this.address = prompt('Enter the address : ');
+        this.city = prompt('Enter the city : ');
+        this.state = prompt('Enter the state : ');
+        this.zip = prompt('Enter the zipcode : ');
+        this.phoneNumber = prompt('Enter the phone number : ');
+        this.email = prompt('Enter the email : ');
+        let contact = new Contact(this.firstName, this.lastName, this.address, this.city, this.state, this.zip,
+            this.phoneNumber, this.email);
+        return contact;
+
+    }
     toString() {
         return '\nName : ' + this.firstName + ' ' + this.lastName + '\nAddress : ' + this.address + '\nCity : ' + this.city +
             '\nState : ' + this.state + '\nZip : ' + this.zip + '\nphoneNumber : ' + this.phoneNumber + '\nEmail : ' + this.email;
     }
 }
+var addressBook = new Array();
+function addContact(contact) {
+    addressBook.push(contact);
+}
+let contact = new Contact();
+addContact(contact.createContact());
+console.log(addressBook);
