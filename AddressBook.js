@@ -170,6 +170,8 @@ function viewByState(){
     }
     else console.log("Persons in state "+state_Name+" are : 0");
 }
+
+
 function countByCity(){
     let city_Name=prompt("Enter city to count persons :");
     let countCityPerson=addressBookData.filter(contact => city_Name.toLowerCase() === contact.city.toLowerCase())
@@ -186,10 +188,32 @@ function countByState(){
         console.log("Number of contacts in "+state_Name+" state are : "+countStatePerson); 
     else  console.log("Number of contacts in "+state_Name+" state are : 0");
 }
+function searchPersonByCity(){
+    let cityName=prompt("Enter city :");
+    let name=prompt("Enter name to search :");
+    let cityPerson=addressBookData.filter(contact => cityName.toLowerCase() === contact.city.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
+                    .map(contact => contact.toString());
+    if(cityPerson.length != 0){
+    console.log("Person "+name+" found in city "+cityName+" . ");
+    console.log(cityPerson.toString());
+    }
+    else console.log("Person "+name+" not found in city "+cityName+" . ");
+}
+function searchPersonByState(){
+    let stateName=prompt("Enter state :");
+    let name=prompt("Enter name to search :");
+    let statePerson=addressBookData.filter(contact => stateName.toLowerCase() === contact.state.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
+                    .map(contact => contact.toString());
+    if(statePerson.length != 0){
+    console.log("Persons "+name+" found in state "+stateName+" . ");
+    console.log(statePerson.toString());
+    }
+    else console.log("Persons "+name+" not found in state "+stateName+" . ");
+}
 
 do{
     var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.View Persons by City 9.View Persons by State "
-    +"10. Count by city 11. Count by state 12.Exit== "));
+    +"10. Count by city 11. Count by state 12.Sort By name 13.Exit== "));
     switch(choice){
         case 1: let fName=prompt("Enter First Name to add contact :");
                 let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
@@ -220,9 +244,12 @@ do{
         case 10:    countByCity();
                     break;    
         case 11:    countByState();
-                    break;         
-        case 12:    console.log("You exit the program.");
+                    break;   
+        case 12:    let sortByName=addressBookData.sort((a, b) => a.firstName.localeCompare(b.firstName));
+                    console.log(sortByName.toString());
+                    break;
+        case 13:    console.log("You exit the program.");
                     break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 12);
+}while(choice != 13);
