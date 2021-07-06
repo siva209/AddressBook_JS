@@ -127,30 +127,57 @@ function deleteContact(){
     else console.log("No contact found.");    
 }
 
-do{
-var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
-                        " 4.Delete Contact 5.Total Contacts 6.Exit== "));
-    switch(choice){
-        case 1: let fName=prompt("Enter First Name to add contact :");
-                let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
-                                        .map(contact => contact.toString());
-                if(found == null){
-                    addContact(fName);
-                }
-                else console.log("Contact already exists.");
-                break;
-        case 2: let name=prompt("Enter First Name to update contact :");
-                updateContact(name);
-                break;
-        case 3: console.log("All Contacts are :"+addressBookData.toString());
-                break;
-        case 4: deleteContact();
-                break;
-        case 5: let totalContacts=addressBookData.reduce((totalContacts) => totalContacts+=1,0);
-                console.log("Number of contacts in addressbook are : "+totalContacts); 
-                break;
-        case 6: console.log("You exit the program.");
-                break;
-        default:    console.log("Wrong choice.");
+function searchPersonByCity(){
+    let cityName=prompt("Enter city :");
+    let name=prompt("Enter name to search :");
+    let cityPerson=addressBookData.filter(contact => cityName.toLowerCase() === contact.city.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
+                    .map(contact => contact.toString());
+    if(cityPerson.length != 0){
+    console.log("Person "+name+" found in city "+cityName+" . ");
+    console.log(cityPerson.toString());
     }
-}while(choice != 6);
+    else console.log("Person "+name+" not found in city "+cityName+" . ");
+}
+function searchPersonByState(){
+    let stateName=prompt("Enter state :");
+    let name=prompt("Enter name to search :");
+    let statePerson=addressBookData.filter(contact => stateName.toLowerCase() === contact.state.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
+                    .map(contact => contact.toString());
+    if(statePerson.length != 0){
+    console.log("Persons "+name+" found in state "+stateName+" . ");
+    console.log(statePerson.toString());
+    }
+    else console.log("Persons "+name+" not found in state "+stateName+" . ");
+}
+
+do{
+    var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
+                            " 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.Exit== "));
+        switch(choice){
+            case 1: let fName=prompt("Enter First Name to add contact :");
+                    let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
+                                            .map(contact => contact.toString());
+                    if(found.length == 0){
+                        addContact(fName);
+                    }
+                    else console.log("Contact already exists.");
+                    break;
+            case 2: let name=prompt("Enter First Name to update contact :");
+                    updateContact(name);
+                    break;
+            case 3: console.log("All Contacts are :"+addressBookData.toString());
+                    break;
+            case 4: deleteContact();
+                    break;
+            case 5: let totalContacts=addressBookData.reduce((totalContacts) => totalContacts+=1,0);
+                    console.log("Number of contacts in addressbook are : "+totalContacts); 
+                    break;
+            case 6: searchPersonByCity();
+                    break;
+            case 7: searchPersonByState();
+                    break;
+            case 8: console.log("You exit the program.");
+                    break;
+            default:    console.log("Wrong choice.");
+        }
+    }while(choice != 8);
