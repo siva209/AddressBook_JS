@@ -150,34 +150,58 @@ function searchPersonByState(){
     else console.log("Persons "+name+" not found in state "+stateName+" . ");
 }
 
+function viewByCity(){
+    let city_Name=prompt("Enter city to view persons :");
+    let viewCityPerson=addressBookData.filter(contact => city_Name.toLowerCase() === contact.city.toLowerCase())
+                    .map(contact => contact.toString());
+    if(viewCityPerson.length != 0){
+    console.log("Persons in city "+city_Name+" are : ");
+    console.log(viewCityPerson.toString());
+    }
+    else console.log("Persons in city "+city_Name+" are : 0 ");
+}
+function viewByState(){
+    let state_Name=prompt("Enter state to view persons :");
+    let viewStatePerson=addressBookData.filter(contact => state_Name.toLowerCase() === contact.state.toLowerCase())
+                    .map(contact => contact.toString());
+    if(viewStatePerson.length != 0){
+    console.log("Persons in state "+state_Name+" are : ");
+    console.log(viewStatePerson.toString());
+    }
+    else console.log("Persons in state "+state_Name+" are : 0");
+}
+
 do{
-    var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
-                            " 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.Exit== "));
-        switch(choice){
-            case 1: let fName=prompt("Enter First Name to add contact :");
-                    let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
-                                            .map(contact => contact.toString());
-                    if(found.length == 0){
-                        addContact(fName);
-                    }
-                    else console.log("Contact already exists.");
-                    break;
-            case 2: let name=prompt("Enter First Name to update contact :");
-                    updateContact(name);
-                    break;
-            case 3: console.log("All Contacts are :"+addressBookData.toString());
-                    break;
-            case 4: deleteContact();
-                    break;
-            case 5: let totalContacts=addressBookData.reduce((totalContacts) => totalContacts+=1,0);
-                    console.log("Number of contacts in addressbook are : "+totalContacts); 
-                    break;
-            case 6: searchPersonByCity();
-                    break;
-            case 7: searchPersonByState();
-                    break;
-            case 8: console.log("You exit the program.");
-                    break;
-            default:    console.log("Wrong choice.");
-        }
-    }while(choice != 8);
+    var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.View Persons by City 9.View Persons by State 10.Exit== "));
+    switch(choice){
+        case 1: let fName=prompt("Enter First Name to add contact :");
+                let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
+                                        .map(contact => contact.toString());
+                if(found.length == 0){
+                    addContact(fName);
+                }
+                else console.log("Contact already exists.");
+                break;
+        case 2: let name=prompt("Enter First Name to update contact :");
+                updateContact(name);
+                break;
+        case 3: console.log("All Contacts are :"+addressBookData.toString());
+                break;
+        case 4: deleteContact();
+                break;
+        case 5: let totalContacts=addressBookData.reduce((totalContacts) => totalContacts+=1,0);
+                console.log("Number of contacts in addressbook are : "+totalContacts); 
+                break;
+        case 6: searchPersonByCity();
+                break;
+        case 7: searchPersonByState();
+                break;
+        case 8: viewByCity();
+                break;
+        case 9: viewByState();
+                break;
+        case 10: console.log("You exit the program.");
+                break;
+        default:    console.log("Wrong choice.");
+    }
+}while(choice != 10);
