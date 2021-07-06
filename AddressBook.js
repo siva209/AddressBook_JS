@@ -93,7 +93,7 @@ function addContact(){
     let zip=prompt("Enter zip code :");
     let phone=prompt("Enter phone number :");
     let email=prompt("Enter email id :");
-    addressbookData.push(new Contact(firstName,lastName,address,city,state,zip,phone,email));
+    addressBookData.push(new Contact(firstName,lastName,address,city,state,zip,phone,email));
     console.log("\n New Contact added..");
 }
 function updateContact(){
@@ -131,11 +131,18 @@ do{
 var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
                         " 4.Delete Contact 5.Total Contacts 6.Exit== "));
     switch(choice){
-        case 1: addContact();
+        case 1: let fName=prompt("Enter First Name to add contact :");
+                let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
+                                        .map(contact => contact.toString());
+                if(found == null){
+                    addContact(fName);
+                }
+                else console.log("Contact already exists.");
                 break;
-        case 2: updateContact();
+        case 2: let name=prompt("Enter First Name to update contact :");
+                updateContact(name);
                 break;
-        case 3: console.log("All Contacts are :"+addressbookData.toString());
+        case 3: console.log("All Contacts are :"+addressBookData.toString());
                 break;
         case 4: deleteContact();
                 break;
