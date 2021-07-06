@@ -213,7 +213,7 @@ function searchPersonByState(){
 
 do{
     var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.View Persons by City 9.View Persons by State "
-    +"10. Count by city 11. Count by state 12.Sort By name 13.Exit== "));
+    +"10. Count by city 11. Count by state 12.Sort By name 13.Sort By city 14.Sort By state 15.Sort By zip code 16.Exit "));
     switch(choice){
         case 1: let fName=prompt("Enter First Name to add contact :");
                 let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
@@ -246,10 +246,20 @@ do{
         case 11:    countByState();
                     break;   
         case 12:    let sortByName=addressBookData.sort((a, b) => a.firstName.localeCompare(b.firstName));
-                    console.log(sortByName.toString());
+                    console.log("Sorted contacts by Name : "+sortByName.toString());
                     break;
-        case 13:    console.log("You exit the program.");
+        case 13:    let sortByCity=addressBookData.sort((a, b) => a.city.localeCompare(b.city));
+                    console.log("Sorted contacts by city : "+sortByCity.toString());
+                    break;
+        case 14:    let sortByState=addressBookData.sort((a, b) => a.state.localeCompare(b.state));
+                    console.log("Sorted contacts by state : "+sortByState.toString());
+                    break;
+        case 15:    let sortByZip=addressBookData.sort((a, b) => a.zip.localeCompare(b.zip));
+                    console.log("Sorted contacts by zip code : "+sortByZip.toString());
+                    break;
+        case 16:    console.log("You exit the program.");
                     break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 13);
+}while(choice != 16);
+
