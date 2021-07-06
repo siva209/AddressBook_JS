@@ -170,9 +170,26 @@ function viewByState(){
     }
     else console.log("Persons in state "+state_Name+" are : 0");
 }
+function countByCity(){
+    let city_Name=prompt("Enter city to count persons :");
+    let countCityPerson=addressBookData.filter(contact => city_Name.toLowerCase() === contact.city.toLowerCase())
+                                        .reduce((countCityPerson) => countCityPerson+=1,0);
+    if(countCityPerson != 0)
+        console.log("Number of contacts in "+city_Name+" city are : "+countCityPerson); 
+    else  console.log("Number of contacts in "+city_Name+" city are : 0");
+}
+function countByState(){
+    let state_Name=prompt("Enter state to count persons :");
+    let countStatePerson=addressBookData.filter(contact => state_Name.toLowerCase() === contact.state.toLowerCase())
+                                        .reduce((countStatePerson) => countStatePerson+=1,0);
+    if(countStatePerson != 0)
+        console.log("Number of contacts in "+state_Name+" state are : "+countStatePerson); 
+    else  console.log("Number of contacts in "+state_Name+" state are : 0");
+}
 
 do{
-    var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.View Persons by City 9.View Persons by State 10.Exit== "));
+    var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.View Persons by City 9.View Persons by State "
+    +"10. Count by city 11. Count by state 12.Exit== "));
     switch(choice){
         case 1: let fName=prompt("Enter First Name to add contact :");
                 let found=addressBookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
@@ -200,8 +217,12 @@ do{
                 break;
         case 9: viewByState();
                 break;
-        case 10: console.log("You exit the program.");
-                break;
+        case 10:    countByCity();
+                    break;    
+        case 11:    countByState();
+                    break;         
+        case 12:    console.log("You exit the program.");
+                    break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 10);
+}while(choice != 12);
