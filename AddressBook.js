@@ -93,7 +93,7 @@ function addContact(){
     let zip=prompt("Enter zip code :");
     let phone=prompt("Enter phone number :");
     let email=prompt("Enter email id :");
-    addressbookData.push(new AddressBook(firstName,lastName,address,city,state,zip,phone,email));
+    addressbookData.push(new Contact(firstName,lastName,address,city,state,zip,phone,email));
     console.log("\n New Contact added..");
 }
 function updateContact(){
@@ -112,18 +112,35 @@ function updateContact(){
     else
         console.log("No contact found.");    
 }
+function deleteContact(){
+    let name=prompt("Enter First Name to delete contact :");
+    let found=0;
+    for (i = 0; i < addressBookData.length; i++) {
+        let data=addressBookData[i];
+        if(name.toLowerCase() === data.firstName.toLowerCase()){
+            found=1;
+            addressBookData.splice(i, 1);
+        }
+    }
+    if(found == 1)
+        console.log("Contact deleted.");
+    else console.log("No contact found.");    
+}
 
 do{
-var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Exit== "));
+var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
+                        " 4.Delete Contact 5.Exit== "));
     switch(choice){
         case 1: addContact();
                 break;
         case 2: updateContact();
                 break;
-        case 3: console.log("All Contacts are :"+addressBookData.toString());
+        case 3: console.log("All Contacts are :"+addressbookData.toString());
                 break;
-        case 4: console.log("You exit the program.");
+        case 4: deleteContact();
+                break;
+        case 5: console.log("You exit the program.");
                 break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 4);
+}while(choice != 5);
